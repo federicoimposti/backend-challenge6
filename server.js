@@ -1,5 +1,7 @@
 const express = require('express');
 const router = require('./routes');
+const controller = require('./controller');
+
 const { Server: HttpServer } = require('http');
 const { Server: IOServer } = require('socket.io');
 
@@ -24,6 +26,10 @@ const messages = [
 
  io.on('connection', function(socket) {
     console.log('Un cliente se ha conectado');
+
+    // products
+
+    socket.emit('products', controller.getAll());
     socket.emit('messages', messages);
 
     socket.on('new-message',data => {

@@ -18,9 +18,22 @@ function addMessage(e) {
     return false;
 }
 
+const renderProductsList = (products) => {
+    return fetch('./templates/productsList.ejs')
+    .then(response => response.text())
+    .then(template => {
+        const productListTemplate = ejs.compile(template);
+        const html = productListTemplate({ products });
+        return html;
+    })
+}
+
 socket.on('products', (data) => {
     console.log(data);
-    return render(data);
-})
+    renderProductsList(data)
+        .then(html => {
+            document.getElementById('products').innerHTML = html;
+        })
+});
 
 socket.on('messages', function(data) { render(data); });
