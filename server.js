@@ -1,6 +1,8 @@
 const express = require('express');
 const router = require('./routes');
-const controller = require('./controller');
+
+const messagesController = require('./controllers/messages');
+const messages = new messagesController('./messages/messages.txt');
 
 const { Server: HttpServer } = require('http');
 const { Server: IOServer } = require('socket.io');
@@ -18,23 +20,22 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/', router);
 
-const messages = [
-    { author: "Juan", text: "¡Hola! ¿Que tal?" },
-    { author: "Pedro", text: "¡Muy bien! ¿Y vos?" },
-    { author: "Ana", text: "¡Genial!" }
- ];
+const products = [];
 
- io.on('connection', function(socket) {
+ io.on('connection', async function(socket) {
     console.log('Un cliente se ha conectado');
 
-    // products
+    socket.emit('products', products);
+    socket.emit('messages', await messages.getAll());
 
-    socket.emit('products', controller.getAll());
-    socket.emit('messages', messages);
+    socket.on('new-message', async (data) => {
+        await messages.save(data);
+        io.sockets.emit('messages', await messages.getAll());
+    });
 
-    socket.on('new-message',data => {
-        messages.push(data);
-        io.sockets.emit('messages', messages);
+    socket.on('new-product', data => {
+        products.push(data);
+        io.sockets.emit('products', products);
     });
 });
 

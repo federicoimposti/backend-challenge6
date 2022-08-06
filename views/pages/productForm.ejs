@@ -8,13 +8,12 @@
     </head>
     <body>
         <div class="container">
-            <form action="/productos" method="POST" class="form-files">
-                <input type="text" placeholder="Nombre" name="title">
-                <input type="text" placeholder="Precio" name="price">
-                <input type="text" placeholder="URL Imagen" name="image">
+            <form action="/productos" method="POST" class="form-files" onsubmit="return addProduct(this)">
+                <input type="text" placeholder="Nombre" name="title" id="product-title">
+                <input type="text" placeholder="Precio" name="price" id="product-price">
+                <input type="text" placeholder="URL Imagen" name="image" id="product-image">
                 <input type="submit" value="Enviar">
             </form>
-            <a class="button" href="/productos">Ver productos</a>
             <div id="products"></div>
             <div id='messages'></div>
             <form action="javascript:void(0);" onsubmit="return addMessage(this)">

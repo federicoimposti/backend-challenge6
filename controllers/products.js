@@ -1,24 +1,7 @@
 const fs = require('fs');
 const error = { error: 'Producto no encontrado' };
 
-let products = [{
-    "title": "Escuadra",
-    "price": 345.23,
-    "image": "https://cdn1.iconfinder.com/data/icons/aami-web-internet/64/aami15-66-512.png",
-    "id": 1
-  },
-  {
-    "title": "Calculadora",
-    "price": 234.56,
-    "image": "https://cdn2.iconfinder.com/data/icons/picons-basic-2/57/basic2-043_calculator-512.png",
-    "id": 2
-  },
-  {
-    "title": "Globo Terráqueo",
-    "price": 345.67,
-    "image": "https://cdn2.iconfinder.com/data/icons/sketchy-basic-icons/94/earth-512.png",
-    "id": 3
-  }];
+let products = [];
 
 module.exports = class Controller {
     constructor(file) {

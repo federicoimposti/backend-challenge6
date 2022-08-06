@@ -1,10 +1,12 @@
 const socket = io.connect();
 
 function render(data) {
-    const html = data.map((elem, index) => {
-        return(`<div>
+    const html = data.map((elem, i, arr) => {
+        return(
+            `<div class="chat-msg ${i === arr.length - 1 ? 'animate__animated animate__bounceInLeft' : ''}">
             <strong>${elem.author}</strong>:
-            <em>${elem.text}</em> </div>`)
+            <em>${elem.text}</em> </div>`
+        )
     }).join(" ");
     document.getElementById('messages').innerHTML = html;
 }
@@ -15,6 +17,16 @@ function addMessage(e) {
         text: document.getElementById('texto').value
     };
     socket.emit('new-message', mensaje);
+    return false;
+}
+
+function addProduct(e) {
+    const product = {
+        title: document.getElementById('product-title').value,
+        price: document.getElementById('product-price').value,
+        image: document.getElementById('product-image').value
+    };
+    socket.emit('new-product', product);
     return false;
 }
 
@@ -29,7 +41,6 @@ const renderProductsList = (products) => {
 }
 
 socket.on('products', (data) => {
-    console.log(data);
     renderProductsList(data)
         .then(html => {
             document.getElementById('products').innerHTML = html;
