@@ -15,9 +15,10 @@
                 <input type="submit" value="Enviar">
             </form>
             <div id="products"></div>
-            <div id='messages'></div>
-            <form action="javascript:void(0);" onsubmit="return addMessage(this)">
-                <input type="text" id="username" placeholder="Tu Nombre" >
+            <h3 class="messages-title">Centro de mensajes</h3>
+            <div id='messages'></div>  
+            <form action="javascript:void(0);" onsubmit="return addMessage(this)" class="messages-form">
+                <input type="text" id="email" placeholder="Tu email" >
                 <input type="text" id="texto" placeholder="Cuéntanos algo...">
                 <input type="submit" value="Enviar">
             </form>

@@ -4,8 +4,8 @@ function render(data) {
     const html = data.map((elem, i, arr) => {
         return(
             `<div class="chat-msg ${i === arr.length - 1 ? 'animate__animated animate__bounceInLeft' : ''}">
-            <strong>${elem.author}</strong>:
-            <em>${elem.text}</em> </div>`
+            <strong class="chat-msg__email">${elem.email}</strong>:
+            <em class="chat-msg__text">[<em class="chat-msg_date">${elem.date}</em>]: ${elem.text}</em> </div>`
         )
     }).join(" ");
     document.getElementById('messages').innerHTML = html;
@@ -13,8 +13,9 @@ function render(data) {
 
 function addMessage(e) {
     const mensaje = {
-        author: document.getElementById('username').value,
-        text: document.getElementById('texto').value
+        email: document.getElementById('email').value,
+        text: document.getElementById('texto').value,
+        date: dayjs().format('DD/MM/YYYY HH:MM:ss'),
     };
     socket.emit('new-message', mensaje);
     return false;

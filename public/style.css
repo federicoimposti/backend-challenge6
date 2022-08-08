@@ -93,3 +93,49 @@ table.products-list {
 img.product-image {
     max-width: 70px;
 }
+
+#products {
+    width: 100%;
+    justify-content: center;
+    display: flex;
+}
+
+#messages {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgb(0 0 0 / 10%);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 16px;
+    width: 600px;
+}
+
+.chat-msg {
+    display: table;
+    background: #ffffff8f;
+    padding: 4px 10px 4px 6px;
+    border-radius: 7px;
+    margin: 8px 0;
+}
+
+.chat-msg__email {
+    color: blue;
+}
+
+.chat-msg_date {
+    color: rgb(121, 82, 13);
+}
+
+.chat-msg__text {
+    color: green;
+}
+
+.messages-title {
+    margin: 64px 0 16px;
+    color: white;
+}
+
+.messages-form {
+    margin: 32px;
+}
